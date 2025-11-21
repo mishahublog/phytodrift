@@ -30,15 +30,16 @@ class Phyto(Lagrangian3DArray):
         ('diameter', {'dtype': np.float32,
                       'units': 'm',
                       'default': 0.0014}),  # for NEA Cod
-        ('neutral_buoyancy_salinity', {'dtype': np.float32,
-                                       'units': '[]',
-                                       'default': 31.25}),  # for NEA Cod
+        # ('phyto_density', {'dtype': np.float32,
+        #                                'units': '[]',
+        #                                'default': 1050}),  # for NEA Cod
         ('density', {'dtype': np.float32,
                      'units': 'kg/m^3',
                      'default': 1028.}),
         ('dead', {'dtype': np.float32,
                      'units': '',
                      'default': 0.})])
+    
 
 
 class PhytoplanktonDrift(OceanDrift):
@@ -113,7 +114,7 @@ class PhytoplanktonDrift(OceanDrift):
 
         # Pelagic Egg properties that determine buoyancy
         eggsize = self.elements.diameter  # 0.0014 for NEA Cod
-        eggsalinity = self.elements.neutral_buoyancy_salinity
+        density = self.elements.density
         # 31.25 for NEA Cod
 
         # prepare interpolation of temp, salt
@@ -151,7 +152,7 @@ class PhytoplanktonDrift(OceanDrift):
         # The Egg has the same temperature as the ambient water and its
         # salinity is regulated by osmosis through the egg shell.
         DENSw = self.sea_water_density(T=T0, S=S0)
-        DENSegg = self.sea_water_density(T=T0, S=eggsalinity)
+        DENSegg = density
         dr = DENSw-DENSegg  # density difference
 
         # water viscosity
