@@ -36,7 +36,7 @@ class Phyto(Lagrangian3DArray):
         ('density', {'dtype': np.float32,
                      'units': 'kg/m^3',
                      'default': 1028.}),
-        ('hatched', {'dtype': np.float32,
+        ('dead', {'dtype': np.float32,
                      'units': '',
                      'default': 0.})])
 
@@ -80,7 +80,7 @@ class PhytoplanktonDrift(OceanDrift):
 
     # Default colors for plotting
     status_colors = {'initial': 'green', 'active': 'blue',
-                     'hatched': 'red', 'eaten': 'yellow', 'died': 'magenta'}
+                     'dead': 'red', 'eaten': 'yellow', 'died': 'magenta'}
 
 
     def __init__(self, *args, **kwargs):
