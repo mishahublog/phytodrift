@@ -157,10 +157,9 @@ class PhytoplanktonDrift(OceanDrift):
         # water viscosity
         my_w = 0.001*(1.7915 - 0.0538*T0 + 0.007*(T0**(2.0)) - 0.0023*S0)
         # ~0.0014 kg m-1 s-1
-
         # terminal velocity for low Reynolds numbers
-        W = (1.0/my_w)*(1.0/18.0)*g*eggsize**2 * dr
-
+        #W = (1.0/my_w)*(1.0/18.0)*g*eggsize**2 * dr
+        w = (2/9)*(dr/my_w)*g*(eggsize**2)
         # # check if we are in a Reynolds regime where Re > 0.5
         # highRe = np.where(W*1000*eggsize/my_w > 0.5)
 
