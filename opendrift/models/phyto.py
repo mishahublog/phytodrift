@@ -97,7 +97,7 @@ class PhytoplanktonDrift(OceanDrift):
         self._set_config_default('drift:vertical_mixing_at_surface', True)
         self._set_config_default('drift:vertical_advection_at_surface', True)
 
-    def update_terminal_velocity(self, Tprofiles=None,
+    def update_settling_velocity(self, Tprofiles=None,
                                  Sprofiles=None, z_index=None):
         """Calculate terminal velocity for Pelagic Egg
 
@@ -175,13 +175,13 @@ class PhytoplanktonDrift(OceanDrift):
         # W2 = W2/100.  # back to m/s
 
         # W[highRe] = W2[highRe]
-        self.elements.terminal_velocity = W
+        self.elements.terminal_velocity = w
 
     def update(self):
         """Update positions and properties of buoyant particles."""
 
         # Turbulent Mixing
-        self.update_terminal_velocity()
+        self.update_settling_velocity()
         self.vertical_mixing()
 
         # Horizontal advection
