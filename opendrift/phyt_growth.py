@@ -6,16 +6,17 @@ def phyt_growth(
     N,
     Ph,
     Fe,
+    Si,
     T,
-    mu_max=1.2,       # d^-1
+    mu_max= 3,       # d^-1
     alpha=0.03,       # light-slope
     K_N=0.5,          # half-sat nitrate (mmol/m3)
     K_Ph=0.03,         # half-sat phosphate (mmol/m3)
     K_Fe=0.001,       # half-sat iron (mmol/m3)
+    K_Si=0.001,
     Q10=2.0,
     T_ref=20.0,
-    mortality=0.05
-):
+    mortality=0.05 ):
     """
     Computes phytoplankton growth with multi-nutrient limitation (N, P, Fe).
     Liebig minimum rule is used for nutrient limitation.
@@ -45,8 +46,10 @@ def phyt_growth(
     lim_N  = N   / (K_N  + N)
     lim_Ph  = Ph   / (K_Ph  + Ph)
     lim_Fe = Fe  / (K_Fe + Fe)
+    lim_Si = Si / (K_Si + Fe)
 
-    mu_nut = min(lim_N, lim_Ph, lim_Fe)
+
+    mu_nut = min(lim_N, lim_Ph, lim_Fe,lim_Si)
 
     # --------------------
     # Temperature dependence
@@ -63,13 +66,6 @@ def phyt_growth(
 
     return {
         "dPdt": dPdt,
-        "mu": mu,
-        "mu_nut": mu_nut,
-        "lim_N": lim_N,
-        "lim_Ph": lim_Ph,
-        "lim_Fe": lim_Fe,
-        "mu_I": mu_I,
-        "mu_T": mu_T
     }
 
 
