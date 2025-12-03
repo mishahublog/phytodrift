@@ -46,10 +46,10 @@ def phyt_growth(
     lim_N  = N   / (K_N  + N)
     lim_Ph  = Ph   / (K_Ph  + Ph)
     lim_Fe = Fe  / (K_Fe + Fe)
-    lim_Si = Si / (K_Si + Fe)
+    lim_Si = Si / (K_Si + Si)
 
 
-    mu_nut = min(lim_N, lim_Ph, lim_Fe,lim_Si)
+    mu_nut = np.minimum.reduce([lim_N, lim_Ph, lim_Fe,lim_Si])
 
     # --------------------
     # Temperature dependence
@@ -64,9 +64,7 @@ def phyt_growth(
     # dP/dt including mortality
     dPdt = (mu - mortality) * P
 
-    return {
-        "dPdt": dPdt,
-    }
+    return dPdt
 
 
 # ---------------------------------------------------------
