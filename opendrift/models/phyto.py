@@ -19,7 +19,7 @@ import logging; logger = logging.getLogger(__name__)
 
 from opendrift.models.oceandrift import OceanDrift, Lagrangian3DArray
 from opendrift.config import CONFIG_LEVEL_ESSENTIAL, CONFIG_LEVEL_BASIC, CONFIG_LEVEL_ADVANCED
-
+#from opendrift.models.physics_methods import hour_angle
 
 # Defining the oil element properties
 class Phyto(Lagrangian3DArray):
@@ -76,6 +76,7 @@ class PhytoplanktonDrift(OceanDrift):
         'turbulent_kinetic_energy': {'fallback': 0},
         'turbulent_generic_length_scale': {'fallback': 0},
         'upward_sea_water_velocity': {'fallback': 0},
+        'surface_net_downward_radiative_flux':{'fallback': 0,'profiles': True}
       }
 
 
@@ -186,6 +187,7 @@ class PhytoplanktonDrift(OceanDrift):
 
         # Horizontal advection
         self.advect_ocean_current()
+        #self.irradiance()
 
         # Vertical advection
         if self.get_config('drift:vertical_advection') is True:

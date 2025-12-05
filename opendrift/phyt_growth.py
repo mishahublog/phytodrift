@@ -8,14 +8,14 @@ def phyt_growth(
     Fe,
     Si,
     T,
-    mu_max= 3,       # d^-1
+    mu_max= 1,       # d^-1
     alpha=0.03,       # light-slope
     K_N=0.5,          # half-sat nitrate (mmol/m3)
     K_Ph=0.03,         # half-sat phosphate (mmol/m3)
     K_Fe=0.001,       # half-sat iron (mmol/m3)
     K_Si=0.001,
     Q10=2.0,
-    T_ref=20.0,
+    T_ref=27.0,
     mortality=0.05 ):
     """
     Computes phytoplankton growth with multi-nutrient limitation (N, P, Fe).
